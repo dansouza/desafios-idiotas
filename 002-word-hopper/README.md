@@ -118,7 +118,6 @@ race
 [INFO] PASSED
 [INFO] running test test-003: hopping from 'pace' to 'peace'
 pace
-place
 peace
 [INFO] runtime: .002948032 seconds
 [INFO] PASSED
