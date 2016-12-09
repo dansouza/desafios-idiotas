@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec nodejs fib-js.js
+exec nodejs fib-js.js $@

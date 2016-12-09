@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec ./fib-go-multicore
+exec ./fib-go-multicore $@

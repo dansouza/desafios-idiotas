@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec php fib-php.php
+exec php fib-php.php $@

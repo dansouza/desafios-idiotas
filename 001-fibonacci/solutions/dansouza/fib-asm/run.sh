@@ -1,3 +1,4 @@
 #!/bin/bash
 
-exec ./fib-asm
+exec ./fib-asm $@
+

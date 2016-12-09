@@ -10,7 +10,6 @@ info() {
 }
 
 SOLUTION="$1"
-RIGHTHASH="411408252ac0d24ad99c6bbd130063ca7e8ff2ee"
 
 if [ ! -e "$SOLUTION"  ]; then
 	fail "missing solution path (a 'run.sh' file) as first argument."
@@ -24,7 +23,8 @@ if [ ! -x "$SOLUTION"  ]; then
 	fail "$SOLUTION is not executable."
 fi
 
-TEST_BASEPATH=$( realpath $0 )
+TEST_FULLPATH=$( realpath $0 )
+TEST_BASEPATH=$( dirname $TEST_FULLPATH )
 FULLPATH=$( realpath $SOLUTION )
 WORKDIR=$( dirname $FULLPATH )
 TMPDIR=$( mktemp -d "${TMPDIR:-/tmp/}desafios-idiotas-$( echo $FULLPATH | sha1sum | cut -d' ' -f1 ).XXXXXXXXXXXX" )
@@ -43,22 +43,33 @@ if [ -x "build.sh" ]; then
 	fi
 fi;
 
-info "running solution..."
+FAILED=0
 
-START=$( date +%s.%N )
-./run.sh $@ | tee "$TMPDIR/output"
-END=$( date +%s.%N )
-ELAPSED=$( echo "($END - $START)" | bc )
+for TEST_PREFIX in ` ls $TEST_BASEPATH/test-* | egrep '[0-9]{3}$' `; do
+	TEST_BASE=$( basename $TEST_PREFIX )
+	TEST_TITLE=$( cat $TEST_PREFIX )
+	TEST_INPUT="$TEST_PREFIX-input"
 
-info "runtime: $ELAPSED seconds"
+	info "running test $TEST_BASE: $TEST_TITLE"
+	
+	START=$( date +%s.%N )
+	cat $TEST_INPUT | ./run.sh | tee "$TMPDIR/$TEST_BASE-output"
+	END=$( date +%s.%N )
+	ELAPSED=$( echo "($END - $START)" | bc )
+	info "runtime: $ELAPSED seconds"
 
-VERIFYHASH=$( cat "$TMPDIR/output" | sha1sum | cut -d' ' -f1 )
+	if [ "`sha1sum $TEST_PREFIX-output | cut -d' ' -f1`" != "`sha1sum $TMPDIR/$TEST_BASE-output | cut -d' ' -f1`" ]; then
+		info "FAILED (expected output can be found at '$TEST_PREFIX-output')"
+		FAILED=1
+	else
+		info "PASSED"
+	fi
+done
+
 rm -rf $TMPDIR &> /dev/null
 
-if [ "$VERIFYHASH" != "$RIGHTHASH" ]; then
-	fail "output hash verification failed, got '$VERIFYHASH', expected '$RIGHTHASH'"
+if [ $FAILED -eq 0 ]; then
+	exit 0
+else
+	exit -1
 fi
-
-info "PASSED"
-
-exit 0

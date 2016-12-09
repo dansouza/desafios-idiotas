@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec ./fib-go-iter
+exec ./fib-go-iter $@

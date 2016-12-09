@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec ./fib-go-multimemo
+exec ./fib-go-multimemo $@

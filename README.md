@@ -26,6 +26,8 @@ You can find many examples of solutions to [001: Fibonacci](001-fibonacci/) to b
 
 Your solution should exit with error code of 0 to signal that it ran successfully, -1 otherwise.
 
+Any arguments passed to `run.sh` or `test.sh` should be passed forward to your solution.
+
 ## testing your solution
 
 Every problem includes a test suite that you can use against your solution to validate it.

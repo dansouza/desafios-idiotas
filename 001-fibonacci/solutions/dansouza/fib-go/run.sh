@@ -1,3 +1,4 @@
 #!/bin/bash
 
-exec ./fib-go
+exec ./fib-go $@
+

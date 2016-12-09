@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec ./fib-c
+exec ./fib-c $@

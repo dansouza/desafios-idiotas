@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec python fib-py.py
+exec python fib-py.py $@
