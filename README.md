@@ -1,5 +1,5 @@
 # desafios-idiotas
-Algorithmic puzzles for the Idiotas group
+Algorithmic puzzles for the Idiotis group
 
 ## getting started
 
@@ -16,7 +16,7 @@ A player can publish as many solutions as he desires as long as he keeps them un
 
 Each problem includes a full description, examples of input and output
 
-Problem [001: Fibonacci](001-fibonacci/README.md) is a very simple exercise that you can use to get acquainted with the process of writing a solution and testing it.
+Problem [001: Fibonacci](001-fibonacci/) is a very simple exercise that you can use to get acquainted with the process of writing a solution and testing it.
 
 Regardless of what language you decide to use, your solution should always be executed by invoking a `run.sh` script - if your solution needs to be compiled first, you include any necessary steps to a script called `build.sh`. Only the execution time of `run.sh` will be taken into consideration during benchmarks and ranking. Your `build.sh` build script should exit with status 0 if it worked, -1 if build fails. `build.sh` and `run.sh` will be executed with their directories as "working directory" ($CWD) by the testing suites and benchmark suites, so file operations will happen relative to the solution's directory.
 
@@ -108,5 +108,5 @@ New puzzles are welcome - first you reserve your puzzle number and title by edit
 Puzzles directory naming should obey the pattern: `/^[0-9]{3}\-[A-Za-z0-9\-_]$/`
 
 ## puzzles
-* [001: Fibonnaci](001-fibonacci/README.md)
-* [002: Word Hopper](002-word-hopper/README.md)
+* [001: Fibonnaci](001-fibonacci/)
+* [002: Word Hopper](002-word-hopper/)
