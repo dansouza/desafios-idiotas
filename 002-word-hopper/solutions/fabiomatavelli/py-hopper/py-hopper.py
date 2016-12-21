@@ -2,6 +2,7 @@
 
 from Levenshtein import distance
 from dijkstar import Graph, find_path, algorithm
+from itertools import product
 
 graph = Graph()
 
@@ -21,15 +22,15 @@ if __name__ == "__main__":
 	visited.append(first_word)
 	words_dicts.remove(first_word)
 
-	while visited != []:
-		for word in visited:
-			for dict_ in words_dicts:
-				if distance(word, dict_) == 1:
-					graph.add_edge(word, dict_, 1)
-					visited.append(dict_)
-					words_dicts.remove(dict_)
+	for visit in visited:
+		if visit == last_word:
+			break
 
-			visited.remove(word)
+		for word in set(words_dicts):
+			if distance(visit, word) == 1:
+				graph.add_edge(visit, word, 1)
+				visited.append(word)
+				words_dicts.remove(word)
 
 	try:
 		for word in find_path(graph, first_word, last_word)[0]:
